@@ -95,6 +95,7 @@ class AppController extends Controller
            
          
             $emailForm= $client->getEmail();
+            $nomForm = $client-getNom();
            
    
             $email = new \SendGrid\Mail\Mail(); 
@@ -108,13 +109,14 @@ class AppController extends Controller
             $email->setSubject("Confirmation de l'envoi du formulaire" );
          
             $email->addContent(
-                "text/html", "
-                
-                <p>Bonjour, votre formulaire a bien été envoyé.</p>
-
-                <p>Cordialement</p>
-              "
+                "text/html", $this->renderView(
+                    'emails/emailClient.html.twig',
+                    ['email' => $emailForm,
+                     'nom' => $nomForm,
+                      ]
+                    )
             );
+
             $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
             try {
                 $response = $sendgrid->send($email);
