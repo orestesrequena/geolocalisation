@@ -1,0 +1,20 @@
+easy_admin:
+    formats:
+        datetime:     'd/m/Y'
+        date:     'd/m/Y'
+    edit:
+        title: 'Edition du %%entity_label%%'
+    new:
+        title: 'Créer %%entity_label%%'
+    entities:
+        Client:
+            class: App\Entity\Client 
+            list:
+                fields: ['nom', 'prenom', 'dateNaissance', 'email','sexe','pays','region','metier'] 
+            form:
+                
+                fields: ['nom', 'prenom', { property: 'dateNaissance', type: 'date', format: 'd/m/Y' }, 'email','sexe','pays','region','metier'] 
+    site_name: 'Geolocalisation'
+    design:
+        brand_color: '#1ABC9C'
+       
